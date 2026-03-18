@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
-from flask_login import UserMixin
+from flask_login import LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -23,6 +23,7 @@ app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz"]
 
 db = SQLAlchemy(app)
 babel = Babel(app)
+login_manager = LoginManager(app)
 
 
 class User(db.Model, UserMixin):
@@ -38,6 +39,11 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return f"<User {self.id}>"
+
+
+@login_manager.user_loader
+def load_user(user_id: int):
+    return User.query.get_or_404(user_id)
 
 
 class Todo(db.Model):
