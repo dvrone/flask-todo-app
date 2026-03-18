@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-18 09:11+0500\n"
-"PO-Revision-Date: 2026-03-18 09:05+0500\n"
+"POT-Creation-Date: 2026-03-18 13:03+0500\n"
+"PO-Revision-Date: 2026-03-18 13:05+0500\n"
 "Last-Translator: Gemini AI <support@google.com>\n"
 "Language: uz\n"
 "Language-Team: uz <LL@li.org>\n"
@@ -18,25 +18,41 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: app.py:46
+#: app.py:75
 msgid "Task created successfully!"
 msgstr "Vazifa muvaffaqiyatli yaratildi!"
 
-#: app.py:58
+#: app.py:87
 msgid "Task deleted successfully!"
 msgstr "Vazifa muvaffaqiyatli o'chirildi!"
 
-#: app.py:61
+#: app.py:90
 msgid "There was an issue deleting that task."
 msgstr "Vazifani o'chirishda xatolik yuz berdi."
 
-#: app.py:72
+#: app.py:101
 msgid "Task updated successfully!"
 msgstr "Vazifa muvaffaqiyatli yangilandi!"
 
-#: app.py:76
+#: app.py:105
 msgid "There was an issue updating your task."
 msgstr "Vazifani yangilashda xatolik yuz berdi."
+
+#: app.py:134
+msgid "Password must be 8+ chars with a digit and uppercase."
+msgstr "Parol kamida 8 ta belgidan iborat bo'lishi, raqam va bosh harf qatnashishi kerak."
+
+#: app.py:139
+msgid "Email already registered."
+msgstr "Ushbu elektron pochta allaqachon ro'yxatdan o'tgan."
+
+#: app.py:148
+msgid "Success! Please log in."
+msgstr "Muvaffaqiyatli! Iltimos, tizimga kiring."
+
+#: app.py:152
+msgid "A database error occurred. Please try again."
+msgstr "Ma'lumotlar bazasida xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring."
 
 #: templates/404.html:3
 msgid "Page Not Found"
@@ -74,21 +90,57 @@ msgstr "Qo'shilgan vaqti"
 msgid "Action"
 msgstr "Amal"
 
-#: templates/index.html:32
-msgid "Delete this task?"
-msgstr "Ushbu vazifa o'chirilsinmi?"
-
-#: templates/index.html:41
+#: templates/index.html:40
 msgid "You don't have any tasks yet. Create your first task!"
 msgstr "Sizda hali vazifalar yo'q. Birinchi vazifangizni yarating!"
 
-#: templates/index.html:51
+#: templates/index.html:50
 msgid "Enter your task"
 msgstr "Vazifani kiriting"
 
-#: templates/index.html:53
+#: templates/index.html:52
 msgid "Add"
 msgstr "Qo'shish"
+
+#: templates/register.html:3
+msgid "Register"
+msgstr "Ro'yxatdan o'tish"
+
+#: templates/register.html:10
+msgid "Create Account"
+msgstr "Hisob yaratish"
+
+#: templates/register.html:13
+msgid "Email"
+msgstr "Elektron pochta"
+
+#: templates/register.html:20
+msgid "name@example.com"
+msgstr "ism@misol.uz"
+
+#: templates/register.html:23
+msgid "Password"
+msgstr "Parol"
+
+#: templates/register.html:28
+msgid "Minimum 8 characters"
+msgstr "Kamida 8 ta belgi"
+
+#: templates/register.html:31
+msgid "Must include a digit and an uppercase letter."
+msgstr "Raqam va bosh harf bo'lishi shart."
+
+#: templates/register.html:34
+msgid "Sign Up"
+msgstr "Ro'yxatdan o'tish"
+
+#: templates/register.html:39
+msgid "Already have an account?"
+msgstr "Akkauntingiz bormi?"
+
+#: templates/register.html:39
+msgid "Login here"
+msgstr "Bu yerda tizimga kiring"
 
 #: templates/update.html:3 templates/update.html:8
 msgid "Update Task"
@@ -102,3 +154,5 @@ msgstr "Yangilash"
 msgid "Cancel and go back"
 msgstr "Bekor qilish va orqaga qaytish"
 
+#~ msgid "Delete this task?"
+#~ msgstr "Ushbu vazifa o'chirilsinmi?"

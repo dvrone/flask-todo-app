@@ -3,14 +3,16 @@ __version__ = "0.2.0"
 import os
 
 from dotenv import load_dotenv
+from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
 from flask_login import LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from password_validator import PasswordValidator
 from sqlalchemy import func
+from werkzeug.security import generate_password_hash
 
 # from datetime import datetime, timezone
-
 
 load_dotenv()
 
@@ -24,6 +26,9 @@ app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz"]
 db = SQLAlchemy(app)
 babel = Babel(app)
 login_manager = LoginManager(app)
+
+schema = PasswordValidator()
+schema.min(8).max(100).has().uppercase().has().digits().has().no().spaces()
 
 
 class User(db.Model, UserMixin):
@@ -110,6 +115,42 @@ def page_not_found(e):
 @app.errorhandler(500)
 def internal_server_error(e):
     return render_template("500.html"), 500
+
+
+# AUTH ROUTES
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+        try:
+            valid = validate_email(email)
+            email = valid.email
+
+            if not schema.validate(password):
+                flash(
+                    _("Password must be 8+ chars with a digit and uppercase."), "danger"
+                )
+                return redirect(url_for("register"))
+
+            if User.query.filter_by(email=email).first():
+                flash(_("Email already registered."), "warning")
+                return redirect(url_for("register"))
+
+            hashed_pw = generate_password_hash(password, method="scrypt")
+            user = User(email=email, password=hashed_pw)
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash(_("Success! Please log in."), "success")
+            return redirect(url_for("index"))
+        except Exception as e:
+            db.session.rollback()  # Important: undo the 'add' if commit fails
+            flash(_("A database error occurred. Please try again."), "danger")
+    return render_template("register.html")
 
 
 if __name__ == "__main__":
