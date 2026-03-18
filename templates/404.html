@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}
+    Page Not Found
+{% endblock title %}
+{% block content %}
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h1 class="display-1 text-center fw-bold">
+                <span class="text-primary">404</span> Page Not Found!
+            </h1>
+            <p class="text-center lead">
+                <a class="text-decoration-none" href="{{ url_for("index") }}"><i class="bi bi-house-fill"></i> Go back</a>
+            </p>
+        </div>
+    </div>
+{% endblock content %}
