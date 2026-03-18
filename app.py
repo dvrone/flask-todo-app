@@ -1,9 +1,10 @@
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 import os
 
 from dotenv import load_dotenv
 from flask import Flask, flash, redirect, render_template, request, url_for
+from flask_babel import Babel, _
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 
@@ -16,8 +17,11 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-fallback-key-1-22-333")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+app.config["BABEL_DEFAULT_LOCALE"] = "uz"
+app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz"]
 
 db = SQLAlchemy(app)
+babel = Babel(app)
 
 
 class Todo(db.Model):
@@ -39,7 +43,7 @@ def index():
         task = Todo(content=content)
         db.session.add(task)
         db.session.commit()
-        flash("Task created successfully!", "success")
+        flash(_("Task created successfully!"), "success")
         return redirect(url_for("index"))
     tasks = Todo.query.order_by(Todo.created_at.desc()).all()
     return render_template("index.html", tasks=tasks)
@@ -51,10 +55,10 @@ def delete(id):
     try:
         db.session.delete(task)
         db.session.commit()
-        flash("Task deleted successfully!", "success")
+        flash(_("Task deleted successfully!"), "success")
     except Exception as e:
         db.session.rollback()
-        flash("There was an issue deleting that task.", "danger")
+        flash(_("There was an issue deleting that task."), "danger")
     return redirect(url_for("index"))
 
 
@@ -65,11 +69,11 @@ def update(id):
         task.content = request.form.get("content")
         try:
             db.session.commit()
-            flash("Task updated successfully!", "success")
+            flash(_("Task updated successfully!"), "success")
             return redirect(url_for("index"))
         except Exception as e:
             db.session.rollback()
-            flash("There was an issue updating your task.", "danger")
+            flash(_("There was an issue updating your task."), "danger")
             return redirect(url_for("index"))
     return render_template("update.html", task=task)
 

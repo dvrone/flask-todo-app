@@ -1,6 +1,30 @@
-.venv
-.vscode
+# Environment variables
 .env
-instance
-__pycache__
+
+# Test scripts (ignore if you want)
 test.py
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.swp
+
+# Virtual environment
+.venv/
+
+# Flask instance folder
+instance/
+
+# Byte-compiled translation files
+translations/**/LC_MESSAGES/*.mo
+
+# Extracted POT files
+messages.pot
+
+# IDE / editor files
+.vscode/
+*.idea/
+*.sublime-project
+*.sublime-workspace

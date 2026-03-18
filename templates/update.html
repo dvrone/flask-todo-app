@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% block title %}
-    Update Task
+    {{ _("Update Task") }}
 {% endblock title %}
 {% block content %}
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <h1 class="text-center mb-3">Update Task</h1>
+            <h1 class="text-center mb-3">{{ _("Update Task") }}</h1>
             <form action="{{ url_for('update', id=task.id) }}"
                   method="post"
                   class="input-group input-group-lg shadow-sm">
@@ -18,13 +18,13 @@
                        required
                        autofocus>
                 <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save me-1"></i> Update
+                    <i class="bi bi-save me-1"></i> {{ _("Update") }}
                 </button>
             </form>
             <div class="text-center mt-3">
                 <a href="{{ url_for("index") }}"
                    class="text-secondary text-decoration-none">
-                    <i class="bi bi-arrow-left"></i> Cancel and go back
+                    <i class="bi bi-arrow-left"></i> {{ _("Cancel and go back") }}
                 </a>
             </div>
         </div>

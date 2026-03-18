@@ -1,0 +1,104 @@
+# Uzbek translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-03-18 09:11+0500\n"
+"PO-Revision-Date: 2026-03-18 09:05+0500\n"
+"Last-Translator: Gemini AI <support@google.com>\n"
+"Language: uz\n"
+"Language-Team: uz <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: app.py:46
+msgid "Task created successfully!"
+msgstr "Vazifa muvaffaqiyatli yaratildi!"
+
+#: app.py:58
+msgid "Task deleted successfully!"
+msgstr "Vazifa muvaffaqiyatli o'chirildi!"
+
+#: app.py:61
+msgid "There was an issue deleting that task."
+msgstr "Vazifani o'chirishda xatolik yuz berdi."
+
+#: app.py:72
+msgid "Task updated successfully!"
+msgstr "Vazifa muvaffaqiyatli yangilandi!"
+
+#: app.py:76
+msgid "There was an issue updating your task."
+msgstr "Vazifani yangilashda xatolik yuz berdi."
+
+#: templates/404.html:3
+msgid "Page Not Found"
+msgstr "Sahifa topilmadi"
+
+#: templates/404.html:9
+msgid "Page Not Found!"
+msgstr "Sahifa topilmadi!"
+
+#: templates/404.html:12 templates/500.html:12
+msgid "Go back to homepage"
+msgstr "Bosh sahifaga qaytish"
+
+#: templates/500.html:3
+msgid "Internal Server Error"
+msgstr "Ichki server xatoligi"
+
+#: templates/500.html:9
+msgid "Internal Server Error!"
+msgstr "Ichki server xatoligi yuz berdi!"
+
+#: templates/index.html:3
+msgid "All Tasks"
+msgstr "Barcha vazifalar"
+
+#: templates/index.html:13
+msgid "Task"
+msgstr "Vazifa"
+
+#: templates/index.html:14
+msgid "Added"
+msgstr "Qo'shilgan vaqti"
+
+#: templates/index.html:15
+msgid "Action"
+msgstr "Amal"
+
+#: templates/index.html:32
+msgid "Delete this task?"
+msgstr "Ushbu vazifa o'chirilsinmi?"
+
+#: templates/index.html:41
+msgid "You don't have any tasks yet. Create your first task!"
+msgstr "Sizda hali vazifalar yo'q. Birinchi vazifangizni yarating!"
+
+#: templates/index.html:51
+msgid "Enter your task"
+msgstr "Vazifani kiriting"
+
+#: templates/index.html:53
+msgid "Add"
+msgstr "Qo'shish"
+
+#: templates/update.html:3 templates/update.html:8
+msgid "Update Task"
+msgstr "Vazifani tahrirlash"
+
+#: templates/update.html:21
+msgid "Update"
+msgstr "Yangilash"
+
+#: templates/update.html:27
+msgid "Cancel and go back"
+msgstr "Bekor qilish va orqaga qaytish"
+

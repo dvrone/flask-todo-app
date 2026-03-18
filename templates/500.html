@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block title %}
-    Internal Server Error
+    {{ _("Internal Server Error") }}
 {% endblock title %}
 {% block content %}
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h1 class="display-1 text-center fw-bold">
-                <span class="text-primary">500</span> Internal Server Error!
+                <span class="text-primary">500</span> {{ _("Internal Server Error!") }}
             </h1>
             <p class="text-center lead">
-                <a class="text-decoration-none" href="{{ url_for("index") }}"><i class="bi bi-house-fill"></i> Go back</a>
+                <a class="text-decoration-none" href="{{ url_for("index") }}"><i class="bi bi-house-fill"></i> {{ _("Go back to homepage") }}</a>
             </p>
         </div>
     </div>
