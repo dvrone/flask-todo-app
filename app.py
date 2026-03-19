@@ -1,17 +1,18 @@
 __version__ = "0.2.0"
 
 import os
+from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, current_user, login_user
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect, FlaskForm
 from password_validator import PasswordValidator
 from sqlalchemy import func
-from werkzeug.security import generate_password_hash
+from werkzeug.security import check_password_hash, generate_password_hash
 from wtforms import BooleanField, EmailField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, Length, ValidationError
 
@@ -30,6 +31,10 @@ db = SQLAlchemy(app)
 babel = Babel(app)
 login_manager = LoginManager(app)
 csrf = CSRFProtect(app)
+
+login_manager.login_message = _("Please log in to view this page.")
+login_manager.login_view = "login"
+login_manager.login_message_category = "info"
 
 schema = PasswordValidator()
 schema.min(8).max(100).has().uppercase().has().digits().has().no().spaces()
@@ -77,7 +82,6 @@ class RegisterForm(FlaskForm):
         _("Email"), validators=[Email(), DataRequired(), Length(max=120)]
     )
     password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
-    remember = BooleanField(_("Remember me"))
     submit = SubmitField(_("Sign Up"))
 
     def validate_email(self, email):
@@ -86,6 +90,13 @@ class RegisterForm(FlaskForm):
             raise ValidationError(
                 _("That email is already taken. Please choose a different one.")
             )
+
+
+class LoginForm(FlaskForm):
+    email = EmailField(_("Email"), validators=[DataRequired(), Length(max=120)])
+    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
+    remember = BooleanField(_("Remember me"))
+    submit = SubmitField(_("Login"))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -145,6 +156,8 @@ def internal_server_error(e):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
     form = RegisterForm()
     if form.validate_on_submit():
         hashed_pw = generate_password_hash(form.password.data, method="scrypt")
@@ -152,8 +165,27 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(_("Your account has been created! You are now able to log in"), "success")
-        return redirect(url_for("index"))
+        return redirect(url_for("login"))
     return render_template("register.html", form=form)
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("index"))
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(email=form.email.data).first()
+        if user and check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get("next")
+            if not next_page or urlsplit(next_page).netloc != "":
+                next_page = url_for("index")
+            flash(_("Welcome back!"), "success")
+            return redirect(next_page)
+        else:
+            flash(_("Login Unsuccessful. Please check email and password."), "danger")
+    return render_template("login.html", form=form)
 
 
 if __name__ == "__main__":
