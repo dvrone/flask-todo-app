@@ -7,7 +7,8 @@ from dotenv import load_dotenv
 from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
-from flask_login import LoginManager, UserMixin, current_user, login_user
+from flask_login import (LoginManager, UserMixin, current_user, login_required,
+                         login_user, logout_user)
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect, FlaskForm
 from password_validator import PasswordValidator
@@ -186,6 +187,14 @@ def login():
         else:
             flash(_("Login Unsuccessful. Please check email and password."), "danger")
     return render_template("login.html", form=form)
+
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash(_("You are logged out!"), "info")
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
