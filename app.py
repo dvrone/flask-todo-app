@@ -4,7 +4,7 @@ import os
 from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
-from email_validator import EmailNotValidError, validate_email
+# from email_validator import EmailNotValidError, validate_email
 from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
 from flask_login import (LoginManager, UserMixin, current_user, login_required,
@@ -14,7 +14,8 @@ from flask_wtf import CSRFProtect, FlaskForm
 from password_validator import PasswordValidator
 from sqlalchemy import func
 from werkzeug.security import check_password_hash, generate_password_hash
-from wtforms import BooleanField, EmailField, PasswordField, SubmitField
+from wtforms import (BooleanField, EmailField, PasswordField, StringField,
+                     SubmitField)
 from wtforms.validators import DataRequired, Email, Length, ValidationError
 
 # from datetime import datetime, timezone
@@ -100,17 +101,27 @@ class LoginForm(FlaskForm):
     submit = SubmitField(_("Login"))
 
 
+class TaskForm(FlaskForm):
+    content = StringField(_("Content"), validators=[DataRequired(), Length(max=200)])
+    submit = SubmitField(_("Add"))
+
+
 @app.route("/", methods=["GET", "POST"])
+@login_required
 def index():
-    if request.method == "POST":
-        content = request.form.get("content")
-        task = Todo(content=content)
+    form = TaskForm()
+    if form.validate_on_submit():
+        task = Todo(content=form.content.data, author=current_user)
         db.session.add(task)
         db.session.commit()
         flash(_("Task created successfully!"), "success")
         return redirect(url_for("index"))
-    tasks = Todo.query.order_by(Todo.created_at.desc()).all()
-    return render_template("index.html", tasks=tasks)
+    tasks = (
+        Todo.query.filter_by(user_id=current_user.id)
+        .order_by(Todo.created_at.desc())
+        .all()
+    )
+    return render_template("index.html", tasks=tasks, form=form)
 
 
 @app.route("/delete/<id>")
