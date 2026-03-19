@@ -8,9 +8,12 @@ from flask import Flask, flash, redirect, render_template, request, url_for
 from flask_babel import Babel, _
 from flask_login import LoginManager, UserMixin
 from flask_sqlalchemy import SQLAlchemy
+from flask_wtf import CSRFProtect, FlaskForm
 from password_validator import PasswordValidator
 from sqlalchemy import func
 from werkzeug.security import generate_password_hash
+from wtforms import BooleanField, EmailField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Email, Length, ValidationError
 
 # from datetime import datetime, timezone
 
@@ -26,6 +29,7 @@ app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz"]
 db = SQLAlchemy(app)
 babel = Babel(app)
 login_manager = LoginManager(app)
+csrf = CSRFProtect(app)
 
 schema = PasswordValidator()
 schema.min(8).max(100).has().uppercase().has().digits().has().no().spaces()
@@ -63,6 +67,25 @@ class Todo(db.Model):
 
     def __repr__(self):
         return f"<Task {self.id}>"
+
+
+# FORMS
+
+
+class RegisterForm(FlaskForm):
+    email = EmailField(
+        _("Email"), validators=[Email(), DataRequired(), Length(max=120)]
+    )
+    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
+    remember = BooleanField(_("Remember me"))
+    submit = SubmitField(_("Sign Up"))
+
+    def validate_email(self, email):
+        user = User.query.filter_by(email=email.data).first()
+        if user:
+            raise ValidationError(
+                _("That email is already taken. Please choose a different one.")
+            )
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -122,35 +145,15 @@ def internal_server_error(e):
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
-        try:
-            valid = validate_email(email)
-            email = valid.email
-
-            if not schema.validate(password):
-                flash(
-                    _("Password must be 8+ chars with a digit and uppercase."), "danger"
-                )
-                return redirect(url_for("register"))
-
-            if User.query.filter_by(email=email).first():
-                flash(_("Email already registered."), "warning")
-                return redirect(url_for("register"))
-
-            hashed_pw = generate_password_hash(password, method="scrypt")
-            user = User(email=email, password=hashed_pw)
-
-            db.session.add(user)
-            db.session.commit()
-
-            flash(_("Success! Please log in."), "success")
-            return redirect(url_for("index"))
-        except Exception as e:
-            db.session.rollback()  # Important: undo the 'add' if commit fails
-            flash(_("A database error occurred. Please try again."), "danger")
-    return render_template("register.html")
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hashed_pw = generate_password_hash(form.password.data, method="scrypt")
+        user = User(email=form.email.data, password=hashed_pw)
+        db.session.add(user)
+        db.session.commit()
+        flash(_("Your account has been created! You are now able to log in"), "success")
+        return redirect(url_for("index"))
+    return render_template("register.html", form=form)
 
 
 if __name__ == "__main__":
