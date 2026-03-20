@@ -125,8 +125,12 @@ def index():
 
 
 @app.route("/delete/<id>")
+@login_required
 def delete(id):
     task = Todo.query.get_or_404(id)
+    if task.author != current_user:
+        flash(_("You do not have permission to delete this task."), "danger")
+        return redirect(url_for("index"))
     try:
         db.session.delete(task)
         db.session.commit()
