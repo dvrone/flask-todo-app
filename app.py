@@ -5,7 +5,8 @@ from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 # from email_validator import EmailNotValidError, validate_email
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import (Flask, abort, flash, redirect, render_template, request,
+                   url_for)
 from flask_babel import Babel, _
 from flask_login import (LoginManager, UserMixin, current_user, login_required,
                          login_user, logout_user)
@@ -106,6 +107,10 @@ class TaskForm(FlaskForm):
     submit = SubmitField(_("Add"))
 
 
+class ToggleTaskForm(FlaskForm):
+    submit = SubmitField(_("Toggle"))
+
+
 @app.route("/", methods=["GET", "POST"])
 @login_required
 def index():
@@ -163,6 +168,20 @@ def update(id):
     elif request.method == "GET":
         form.content.data = task.content
     return render_template("update.html", task=task, form=form)
+
+
+@app.route("/toggle/<int:id>", methods=["GET", "POST"])
+def toggle_task(id):
+    task = db.get_or_404(Todo, id)
+    if task.author != current_user:
+        abort(403)
+    form = ToggleTaskForm()
+    if form.validate_on_submit():
+        task.completed = not task.completed
+        db.session.commit()
+        status = _("completed") if task.completed else _("pending")
+        flash(_(f"Task marked as {status}"), "info")
+    return redirect(url_for("index"))
 
 
 @app.errorhandler(404)

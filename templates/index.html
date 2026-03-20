@@ -10,6 +10,7 @@
                 <table class="table mb-3">
                     <thead>
                         <tr>
+                            <th>{{ _("Status") }}</th>
                             <th>{{ _("Task") }}</th>
                             <th>{{ _("Added") }}</th>
                             <th>{{ _("Action") }}</th>
@@ -18,17 +19,30 @@
                     <tbody>
                         {% for task in tasks %}
                             <tr class="{{ 'table-light' if task.completed }}">
+                                <td>
+                                    <form action="{{ url_for('toggle_task', id=task.id) }}" method="post">
+                                        {{ form.hidden_tag() }}
+                                        <input type="checkbox"
+                                               class="form-check-input"
+                                               onchange="this.form.submit()"
+                                               {{ 'checked' if task.completed }}>
+                                    </form>
+                                </td>
                                 <td class="{{ 'text-decoration-line-through text-muted' if task.completed }}">{{ task.content }}</td>
                                 <td>
                                     <small class="text-muted">{{ task.created_at.strftime("%b %d") }}</small>
                                 </td>
                                 <td>
                                     <a href="{{ url_for('update', id=task.id) }}"
-                                       class="btn btn-sm btn-primary">
+                                       class="btn btn-sm btn-primary"
+                                       title="{{ _("Edit Task") }}"
+                                       aria-label="{{ _("Edit Task") }}">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                                     <a href="{{ url_for('delete', id=task.id) }}"
-                                       class="btn btn-sm btn-danger">
+                                       class="btn btn-sm btn-danger"
+                                       title="{{ _("Delete Task") }}"
+                                       aria-label="{{ _("Delete Task") }}">
                                         <i class="bi bi-trash-fill"></i>
                                     </a>
                                 </td>
