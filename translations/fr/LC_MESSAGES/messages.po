@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-20 10:00+0500\n"
+"POT-Creation-Date: 2026-03-20 17:40+0500\n"
 "PO-Revision-Date: 2026-03-20 09:51+0500\n"
 "Last-Translator: Gemini <support@google.com>\n"
 "Language: fr\n"
@@ -98,24 +98,24 @@ msgstr "terminé"
 msgid "pending"
 msgstr "en attente"
 
-#: app.py:194
+#: app.py:193
 #, python-format
 msgid "Task marked as %(status)s"
 msgstr "Tâche marquée comme %(status)s"
 
-#: app.py:221
+#: app.py:220
 msgid "Your account has been created! You are now able to log in"
 msgstr "Votre compte a été créé ! Vous pouvez maintenant vous connecter."
 
-#: app.py:238
+#: app.py:237
 msgid "Welcome back!"
 msgstr "Bon retour parmi nous !"
 
-#: app.py:241
+#: app.py:240
 msgid "Login Unsuccessful. Please check email and password."
 msgstr "Échec de la connexion. Veuillez vérifier l'e-mail et le mot de passe."
 
-#: app.py:249
+#: app.py:248
 msgid "You are logged out!"
 msgstr "Vous êtes déconnecté !"
 
@@ -159,19 +159,23 @@ msgstr "Ajouté le"
 msgid "Action"
 msgstr "Action"
 
-#: templates/index.html:38 templates/index.html:39
-msgid "Edit Task"
+#: templates/index.html:47
+msgid "Actions"
+msgstr "Action"
+
+#: templates/index.html:51
+msgid "Edit"
 msgstr "Modifier la tâche"
 
-#: templates/index.html:44 templates/index.html:45
-msgid "Delete Task"
+#: templates/index.html:60
+msgid "Delete"
 msgstr "Supprimer la tâche"
 
-#: templates/index.html:54
+#: templates/index.html:71
 msgid "You don't have any tasks yet. Create your first task!"
 msgstr "Vous n'avez pas encore de tâches. Créez votre première tâche !"
 
-#: templates/index.html:60 templates/update.html:13
+#: templates/index.html:77 templates/update.html:13
 msgid "Enter your task"
 msgstr "Saisissez votre tâche"
 

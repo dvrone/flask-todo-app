@@ -33,18 +33,35 @@
                                     <small class="text-muted">{{ task.created_at.strftime("%b %d") }}</small>
                                 </td>
                                 <td>
-                                    <a href="{{ url_for('update', id=task.id) }}"
-                                       class="btn btn-sm btn-primary"
-                                       title="{{ _("Edit Task") }}"
-                                       aria-label="{{ _("Edit Task") }}">
-                                        <i class="bi bi-pencil-square"></i>
-                                    </a>
-                                    <a href="{{ url_for('delete', id=task.id) }}"
-                                       class="btn btn-sm btn-danger"
-                                       title="{{ _("Delete Task") }}"
-                                       aria-label="{{ _("Delete Task") }}">
-                                        <i class="bi bi-trash-fill"></i>
-                                    </a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-sm btn-link text-dark p-0"
+                                                type="button"
+                                                data-bs-toggle="dropdown"
+                                                aria-expanded="false"
+                                                style="text-decoration: none;
+                                                       box-shadow: none">
+                                            <i class="bi bi-three-dots-vertical"></i>
+                                        </button>
+                                        <ul class="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <h6 class="dropdown-header">{{ _("Actions") }}</h6>
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item" href="{{ url_for('update', id=task.id) }}">
+                                                    <i class="bi bi-pencil-square me-2 text-primary"></i> {{ _("Edit") }}
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li>
+                                                <a class="dropdown-item text-danger"
+                                                   href="{{ url_for('delete', id=task.id) }}">
+                                                    <i class="bi bi-trash-fill me-2"></i> {{ _("Delete") }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </td>
                             </tr>
                         {% endfor %}
