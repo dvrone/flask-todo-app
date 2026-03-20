@@ -97,8 +97,8 @@ Open your browser at: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
 
 ## 📸 Demo
 
-![Home Page](demo/home-page.png)
-![Update Task](demo/update-page.png)
+![Home Page](demo/v0.3.2/home-page.png)
+![Update Task](demo/v0.3.2/update-page.png)
 
 Live demo: [https://taskmaster00.pythonanywhere.com/](https://taskmaster00.pythonanywhere.com/)
 
