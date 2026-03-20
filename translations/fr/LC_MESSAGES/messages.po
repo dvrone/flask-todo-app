@@ -1,4 +1,4 @@
-# Uzbek translations for PROJECT.
+# French translations for PROJECT.
 # Copyright (C) 2026 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
@@ -8,11 +8,11 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2026-03-20 10:00+0500\n"
-"PO-Revision-Date: 2026-03-20 09:48+0500\n"
+"PO-Revision-Date: 2026-03-20 09:51+0500\n"
 "Last-Translator: Gemini <support@google.com>\n"
-"Language: uz\n"
-"Language-Team: uz <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fr\n"
+"Language-Team: fr <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,202 +20,202 @@ msgstr ""
 
 #: app.py:48
 msgid "Please log in to view this page."
-msgstr "Ushbu sahifani ko‘rish uchun tizimga kiring."
+msgstr "Veuillez vous connecter pour voir cette page."
 
 #: app.py:95 app.py:109
 msgid "Email"
-msgstr "Elektron pochta"
+msgstr "E-mail"
 
 #: app.py:97 app.py:110
 msgid "Password"
-msgstr "Parol"
+msgstr "Mot de passe"
 
 #: app.py:98
 msgid "Sign Up"
-msgstr "Ro‘yxatdan o‘tish"
+msgstr "S'inscrire"
 
 #: app.py:104
 msgid "That email is already taken. Please choose a different one."
-msgstr "Bu elektron pochta band. Iltimos, boshqasini tanlang."
+msgstr "Cet e-mail est déjà utilisé. Veuillez en choisir un autre."
 
 #: app.py:111
 msgid "Remember me"
-msgstr "Meni eslab qol"
+msgstr "Se souvenir de moi"
 
 #: app.py:112 templates/login.html:3 templates/login.html:10
 msgid "Login"
-msgstr "Kirish"
+msgstr "Connexion"
 
 #: app.py:116
 msgid "Content"
-msgstr "Mazmun"
+msgstr "Contenu"
 
 #: app.py:117
 msgid "Add"
-msgstr "Qo‘shish"
+msgstr "Ajouter"
 
 #: app.py:121
 msgid "Toggle"
-msgstr "Holatni o'zgartirish"
+msgstr "Basculer"
 
 #: app.py:132
 msgid "Task created successfully!"
-msgstr "Vazifa muvaffaqiyatli yaratildi!"
+msgstr "Tâche créée avec succès !"
 
 #: app.py:147
 msgid "You do not have permission to delete this task."
-msgstr "Sizda ushbu vazifani o‘chirish uchun ruxsat yo‘q."
+msgstr "Vous n'avez pas l'autorisation de supprimer cette tâche."
 
 #: app.py:152
 msgid "Task deleted successfully!"
-msgstr "Vazifa muvaffaqiyatli o‘chirildi!"
+msgstr "Tâche supprimée avec succès !"
 
 #: app.py:155
 msgid "There was an issue deleting that task."
-msgstr "Vazifani o‘chirishda xatolik yuz berdi."
+msgstr "Un problème est survenu lors de la suppression de la tâche."
 
 #: app.py:164
 msgid "You don't have permission to edit this."
-msgstr "Sizda buni tahrirlash uchun ruxsat yo‘q."
+msgstr "Vous n'avez pas l'autorisation de modifier ceci."
 
 #: app.py:167
 msgid "Update"
-msgstr "Yangilash"
+msgstr "Mettre à jour"
 
 #: app.py:172
 msgid "Task updated successfully!"
-msgstr "Vazifa muvaffaqiyatli yangilandi!"
+msgstr "Tâche mise à jour avec succès !"
 
 #: app.py:176
 msgid "There was an issue updating your task."
-msgstr "Vazifani yangilashda xatolik yuz berdi."
+msgstr "Un problème est survenu lors de la mise à jour de votre tâche."
 
 #: app.py:192
 msgid "completed"
-msgstr "bajarildi"
+msgstr "terminé"
 
 #: app.py:192
 msgid "pending"
-msgstr "kutilmoqda"
+msgstr "en attente"
 
 #: app.py:194
 #, python-format
 msgid "Task marked as %(status)s"
-msgstr "Vazifa %(status)s deb belgilandi"
+msgstr "Tâche marquée comme %(status)s"
 
 #: app.py:221
 msgid "Your account has been created! You are now able to log in"
-msgstr "Hisobingiz yaratildi! Endi tizimga kirishingiz mumkin."
+msgstr "Votre compte a été créé ! Vous pouvez maintenant vous connecter."
 
 #: app.py:238
 msgid "Welcome back!"
-msgstr "Xush kelibsiz!"
+msgstr "Bon retour parmi nous !"
 
 #: app.py:241
 msgid "Login Unsuccessful. Please check email and password."
-msgstr "Kirish amalga oshmadi. Elektron pochta va parolni tekshiring."
+msgstr "Échec de la connexion. Veuillez vérifier l'e-mail et le mot de passe."
 
 #: app.py:249
 msgid "You are logged out!"
-msgstr "Siz tizimdan chiqdingiz!"
+msgstr "Vous êtes déconnecté !"
 
 #: templates/404.html:3
 msgid "Page Not Found"
-msgstr "Sahifa topilmadi"
+msgstr "Page non trouvée"
 
 #: templates/404.html:9
 msgid "Page Not Found!"
-msgstr "Sahifa topilmadi!"
+msgstr "Page non trouvée !"
 
 #: templates/404.html:12 templates/500.html:12
 msgid "Go back to homepage"
-msgstr "Bosh sahifaga qaytish"
+msgstr "Retour à l'accueil"
 
 #: templates/500.html:3
 msgid "Internal Server Error"
-msgstr "Ichki server xatosi"
+msgstr "Erreur interne du serveur"
 
 #: templates/500.html:9
 msgid "Internal Server Error!"
-msgstr "Ichki server xatosi!"
+msgstr "Erreur interne du serveur !"
 
 #: templates/index.html:3
 msgid "All Tasks"
-msgstr "Barcha vazifalar"
+msgstr "Toutes les tâches"
 
 #: templates/index.html:13
 msgid "Status"
-msgstr "Holat"
+msgstr "Statut"
 
 #: templates/index.html:14
 msgid "Task"
-msgstr "Vazifa"
+msgstr "Tâche"
 
 #: templates/index.html:15
 msgid "Added"
-msgstr "Qo‘shildi"
+msgstr "Ajouté le"
 
 #: templates/index.html:16
 msgid "Action"
-msgstr "Amal"
+msgstr "Action"
 
 #: templates/index.html:38 templates/index.html:39
 msgid "Edit Task"
-msgstr "Vazifani tahrirlash"
+msgstr "Modifier la tâche"
 
 #: templates/index.html:44 templates/index.html:45
 msgid "Delete Task"
-msgstr "Vazifani o‘chirish"
+msgstr "Supprimer la tâche"
 
 #: templates/index.html:54
 msgid "You don't have any tasks yet. Create your first task!"
-msgstr "Sizda hali vazifalar yo‘q. Birinchi vazifangizni yarating!"
+msgstr "Vous n'avez pas encore de tâches. Créez votre première tâche !"
 
 #: templates/index.html:60 templates/update.html:13
 msgid "Enter your task"
-msgstr "Vazifani kiriting"
+msgstr "Saisissez votre tâche"
 
 #: templates/login.html:21 templates/register.html:21
 msgid "name@example.com"
-msgstr "ism@misol.uz"
+msgstr "nom@exemple.com"
 
 #: templates/login.html:43
 msgid "Don't have an account?"
-msgstr "Hisobingiz yo‘qmi?"
+msgstr "Vous n'avez pas de compte ?"
 
 #: templates/login.html:43
 msgid "Register here"
-msgstr "Shu yerda ro‘yxatdan o‘ting"
+msgstr "Inscrivez-vous ici"
 
 #: templates/navbar.html:12
 msgid "Home"
-msgstr "Bosh sahifa"
+msgstr "Accueil"
 
 #: templates/register.html:3
 msgid "Register"
-msgstr "Ro‘yxatdan o‘tish"
+msgstr "S'inscrire"
 
 #: templates/register.html:10
 msgid "Create Account"
-msgstr "Hisob yaratish"
+msgstr "Créer un compte"
 
 #: templates/register.html:34
 msgid "Must include a digit and an uppercase letter."
-msgstr "Raqam va katta harf bo‘lishi shart."
+msgstr "Doit inclure un chiffre et une lettre majuscule."
 
 #: templates/register.html:40
 msgid "Already have an account?"
-msgstr "Hisobingiz bormi?"
+msgstr "Vous avez déjà un compte ?"
 
 #: templates/register.html:40
 msgid "Login here"
-msgstr "Shu yerda kiring"
+msgstr "Connectez-vous ici"
 
 #: templates/update.html:3 templates/update.html:8
 msgid "Update Task"
-msgstr "Vazifani yangilash"
+msgstr "Modifier la tâche"
 
 #: templates/update.html:25
 msgid "Cancel and go back"
-msgstr "Bekor qilish va ortga qaytish"
+msgstr "Annuler et revenir"
 

@@ -1,14 +1,14 @@
-__version__ = "0.3.0"
+__version__ = "0.3.1"
 
 import os
 from urllib.parse import urlsplit
 
 from dotenv import load_dotenv
 # from email_validator import EmailNotValidError, validate_email
-from flask import (Flask, abort, flash, redirect, render_template, request,
-                   url_for)
+from flask import (Flask, abort, flash, make_response, redirect,
+                   render_template, request, url_for)
 from flask_babel import Babel, _
-from flask_babel import lazy_gettext as _l
+from flask_babel import lazy_gettext as _
 from flask_login import (LoginManager, UserMixin, current_user, login_required,
                          login_user, logout_user)
 from flask_sqlalchemy import SQLAlchemy
@@ -31,12 +31,21 @@ app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.config["BABEL_DEFAULT_LOCALE"] = "ru"
 app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz", "ru"]
 
+
+def get_locale():
+    return (
+        request.args.get("lang")
+        or request.cookies.get("lang")
+        or request.accept_languages.best_match(["en", "uz"])
+    )
+
+
 db = SQLAlchemy(app)
-babel = Babel(app)
+babel = Babel(app, locale_selector=get_locale)
 login_manager = LoginManager(app)
 csrf = CSRFProtect(app)
 
-login_manager.login_message = _l("Please log in to view this page.")
+login_manager.login_message = _("Please log in to view this page.")
 login_manager.login_view = "login"
 login_manager.login_message_category = "info"
 
@@ -83,33 +92,33 @@ class Todo(db.Model):
 
 class RegisterForm(FlaskForm):
     email = EmailField(
-        _l("Email"), validators=[Email(), DataRequired(), Length(max=120)]
+        _("Email"), validators=[Email(), DataRequired(), Length(max=120)]
     )
-    password = PasswordField(_l("Password"), validators=[DataRequired(), Length(min=8)])
-    submit = SubmitField(_l("Sign Up"))
+    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
+    submit = SubmitField(_("Sign Up"))
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(
-                _l("That email is already taken. Please choose a different one.")
+                _("That email is already taken. Please choose a different one.")
             )
 
 
 class LoginForm(FlaskForm):
-    email = EmailField(_l("Email"), validators=[DataRequired(), Length(max=120)])
-    password = PasswordField(_l("Password"), validators=[DataRequired(), Length(min=8)])
-    remember = BooleanField(_l("Remember me"))
-    submit = SubmitField(_l("Login"))
+    email = EmailField(_("Email"), validators=[DataRequired(), Length(max=120)])
+    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
+    remember = BooleanField(_("Remember me"))
+    submit = SubmitField(_("Login"))
 
 
 class TaskForm(FlaskForm):
-    content = StringField(_l("Content"), validators=[DataRequired(), Length(max=200)])
-    submit = SubmitField(_l("Add"))
+    content = StringField(_("Content"), validators=[DataRequired(), Length(max=200)])
+    submit = SubmitField(_("Add"))
 
 
 class ToggleTaskForm(FlaskForm):
-    submit = SubmitField(_l("Toggle"))
+    submit = SubmitField(_("Toggle"))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -182,7 +191,7 @@ def toggle_task(id):
         db.session.commit()
         status = _("completed") if task.completed else _("pending")
         # TODO: fix here
-        flash(_(f"Task marked as {status}"), "info")
+        flash(_("Task marked as %(status)s", status=status), "info")
     return redirect(url_for("index"))
 
 
@@ -239,6 +248,13 @@ def logout():
     logout_user()
     flash(_("You are logged out!"), "info")
     return redirect(url_for("login"))
+
+
+@app.route("/setlang/<lang>")
+def set_language(lang):
+    resp = make_response(redirect(url_for("index")))
+    resp.set_cookie("lang", lang)
+    return resp
 
 
 if __name__ == "__main__":

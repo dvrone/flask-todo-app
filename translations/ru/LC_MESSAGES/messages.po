@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2026-03-20 09:03+0500\n"
-"PO-Revision-Date: 2026-03-20 09:07+0500\n"
+"POT-Creation-Date: 2026-03-20 10:00+0500\n"
+"PO-Revision-Date: 2026-03-20 09:48+0500\n"
 "Last-Translator: Gemini <support@google.com>\n"
 "Language: ru\n"
 "Language-Team: ru <LL@li.org>\n"
@@ -19,99 +19,104 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
 
-#: app.py:38
+#: app.py:48
 msgid "Please log in to view this page."
-msgstr "Пожалуйста, войдите, чтобы просмотреть эту страницу."
+msgstr "Пожалуйста, войдите в систему, чтобы просмотреть эту страницу."
 
-#: app.py:85 app.py:99
+#: app.py:95 app.py:109
 msgid "Email"
 msgstr "Электронная почта"
 
-#: app.py:87 app.py:100
+#: app.py:97 app.py:110
 msgid "Password"
 msgstr "Пароль"
 
-#: app.py:88
+#: app.py:98
 msgid "Sign Up"
-msgstr "Регистрация"
+msgstr "Зарегистрироваться"
 
-#: app.py:94
+#: app.py:104
 msgid "That email is already taken. Please choose a different one."
 msgstr "Этот адрес электронной почты уже занят. Пожалуйста, выберите другой."
 
-#: app.py:101
+#: app.py:111
 msgid "Remember me"
 msgstr "Запомнить меня"
 
-#: app.py:102 templates/login.html:3 templates/login.html:10
+#: app.py:112 templates/login.html:3 templates/login.html:10
 msgid "Login"
 msgstr "Вход"
 
-#: app.py:106
+#: app.py:116
 msgid "Content"
 msgstr "Содержимое"
 
-#: app.py:107
+#: app.py:117
 msgid "Add"
 msgstr "Добавить"
 
-#: app.py:111
+#: app.py:121
 msgid "Toggle"
 msgstr "Переключить"
 
-#: app.py:122
+#: app.py:132
 msgid "Task created successfully!"
 msgstr "Задача успешно создана!"
 
-#: app.py:137
+#: app.py:147
 msgid "You do not have permission to delete this task."
 msgstr "У вас нет прав для удаления этой задачи."
 
-#: app.py:142
+#: app.py:152
 msgid "Task deleted successfully!"
 msgstr "Задача успешно удалена!"
 
-#: app.py:145
+#: app.py:155
 msgid "There was an issue deleting that task."
-msgstr "Произошла ошибка при удалении задачи."
+msgstr "Возникла проблема при удалении задачи."
 
-#: app.py:154
+#: app.py:164
 msgid "You don't have permission to edit this."
 msgstr "У вас нет прав для редактирования этой записи."
 
-#: app.py:157
+#: app.py:167
 msgid "Update"
 msgstr "Обновить"
 
-#: app.py:162
+#: app.py:172
 msgid "Task updated successfully!"
 msgstr "Задача успешно обновлена!"
 
-#: app.py:166
+#: app.py:176
 msgid "There was an issue updating your task."
-msgstr "Произошла ошибка при обновлении вашей задачи."
+msgstr "Возникла проблема при обновлении вашей задачи."
 
-#: app.py:182
+#: app.py:192
 msgid "completed"
 msgstr "выполнено"
 
-#: app.py:182
+#: app.py:192
 msgid "pending"
 msgstr "в ожидании"
 
-#: app.py:210
-msgid "Your account has been created! You are now able to log in"
-msgstr "Ваш аккаунт создан! Теперь вы можете войти."
+#: app.py:194
+#, python-format
+msgid "Task marked as %(status)s"
+msgstr "Задача отмечена как %(status)s"
 
-#: app.py:227
+#: app.py:221
+msgid "Your account has been created! You are now able to log in"
+msgstr "Ваш аккаунт создан! Теперь вы можете войти в систему."
+
+#: app.py:238
 msgid "Welcome back!"
 msgstr "С возвращением!"
 
-#: app.py:230
+#: app.py:241
 msgid "Login Unsuccessful. Please check email and password."
 msgstr "Ошибка входа. Пожалуйста, проверьте почту и пароль."
 
-#: app.py:238
+#: app.py:249
 msgid "You are logged out!"
 msgstr "Вы вышли из системы!"
 
@@ -169,7 +174,7 @@ msgstr "У вас еще нет задач. Создайте свою перву
 
 #: templates/index.html:60 templates/update.html:13
 msgid "Enter your task"
-msgstr "Введите задачу"
+msgstr "Введите текст задачи"
 
 #: templates/login.html:21 templates/register.html:21
 msgid "name@example.com"
@@ -183,6 +188,10 @@ msgstr "Нет аккаунта?"
 msgid "Register here"
 msgstr "Зарегистрируйтесь здесь"
 
+#: templates/navbar.html:12
+msgid "Home"
+msgstr "Главная"
+
 #: templates/register.html:3
 msgid "Register"
 msgstr "Регистрация"
@@ -193,7 +202,7 @@ msgstr "Создать аккаунт"
 
 #: templates/register.html:34
 msgid "Must include a digit and an uppercase letter."
-msgstr "Должен содержать цифру и заглавную букву."
+msgstr "Пароль должен содержать цифру и заглавную букву."
 
 #: templates/register.html:40
 msgid "Already have an account?"
@@ -210,3 +219,4 @@ msgstr "Обновить задачу"
 #: templates/update.html:25
 msgid "Cancel and go back"
 msgstr "Отменить и вернуться"
+
