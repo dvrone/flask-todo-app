@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from flask import (Flask, abort, flash, redirect, render_template, request,
                    url_for)
 from flask_babel import Babel, _
+from flask_babel import lazy_gettext as _l
 from flask_login import (LoginManager, UserMixin, current_user, login_required,
                          login_user, logout_user)
 from flask_sqlalchemy import SQLAlchemy
@@ -27,15 +28,15 @@ app = Flask(__name__, template_folder="templates", static_folder="static")
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY", "dev-fallback-key-1-22-333")
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("SQLALCHEMY_DATABASE_URI")
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-app.config["BABEL_DEFAULT_LOCALE"] = "uz"
-app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz"]
+app.config["BABEL_DEFAULT_LOCALE"] = "ru"
+app.config["BABEL_SUPPORTED_LOCALES"] = ["en", "uz", "ru"]
 
 db = SQLAlchemy(app)
 babel = Babel(app)
 login_manager = LoginManager(app)
 csrf = CSRFProtect(app)
 
-login_manager.login_message = _("Please log in to view this page.")
+login_manager.login_message = _l("Please log in to view this page.")
 login_manager.login_view = "login"
 login_manager.login_message_category = "info"
 
@@ -82,33 +83,33 @@ class Todo(db.Model):
 
 class RegisterForm(FlaskForm):
     email = EmailField(
-        _("Email"), validators=[Email(), DataRequired(), Length(max=120)]
+        _l("Email"), validators=[Email(), DataRequired(), Length(max=120)]
     )
-    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
-    submit = SubmitField(_("Sign Up"))
+    password = PasswordField(_l("Password"), validators=[DataRequired(), Length(min=8)])
+    submit = SubmitField(_l("Sign Up"))
 
     def validate_email(self, email):
         user = User.query.filter_by(email=email.data).first()
         if user:
             raise ValidationError(
-                _("That email is already taken. Please choose a different one.")
+                _l("That email is already taken. Please choose a different one.")
             )
 
 
 class LoginForm(FlaskForm):
-    email = EmailField(_("Email"), validators=[DataRequired(), Length(max=120)])
-    password = PasswordField(_("Password"), validators=[DataRequired(), Length(min=8)])
-    remember = BooleanField(_("Remember me"))
-    submit = SubmitField(_("Login"))
+    email = EmailField(_l("Email"), validators=[DataRequired(), Length(max=120)])
+    password = PasswordField(_l("Password"), validators=[DataRequired(), Length(min=8)])
+    remember = BooleanField(_l("Remember me"))
+    submit = SubmitField(_l("Login"))
 
 
 class TaskForm(FlaskForm):
-    content = StringField(_("Content"), validators=[DataRequired(), Length(max=200)])
-    submit = SubmitField(_("Add"))
+    content = StringField(_l("Content"), validators=[DataRequired(), Length(max=200)])
+    submit = SubmitField(_l("Add"))
 
 
 class ToggleTaskForm(FlaskForm):
-    submit = SubmitField(_("Toggle"))
+    submit = SubmitField(_l("Toggle"))
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -180,6 +181,7 @@ def toggle_task(id):
         task.completed = not task.completed
         db.session.commit()
         status = _("completed") if task.completed else _("pending")
+        # TODO: fix here
         flash(_(f"Task marked as {status}"), "info")
     return redirect(url_for("index"))
 
