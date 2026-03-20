@@ -1,4 +1,4 @@
-__version__ = "0.3.1"
+__version__ = "0.3.2"
 
 import os
 from urllib.parse import urlsplit
@@ -190,7 +190,6 @@ def toggle_task(id):
         task.completed = not task.completed
         db.session.commit()
         status = _("completed") if task.completed else _("pending")
-        # TODO: fix here
         flash(_("Task marked as %(status)s", status=status), "info")
     return redirect(url_for("index"))
 
