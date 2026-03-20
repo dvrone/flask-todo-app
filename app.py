@@ -142,19 +142,27 @@ def delete(id):
 
 
 @app.route("/update/<int:id>", methods=["GET", "POST"])
+@login_required
 def update(id):
     task = Todo.query.get_or_404(id)
-    if request.method == "POST":
-        task.content = request.form.get("content")
+    if task.author != current_user:
+        flash(_("You don't have permission to edit this."), "danger")
+        return redirect(url_for("index"))
+    form = TaskForm()
+    form.submit.label.text = _("Update")
+    if form.validate_on_submit():
         try:
+            task.content = form.content.data
             db.session.commit()
             flash(_("Task updated successfully!"), "success")
             return redirect(url_for("index"))
-        except Exception as e:
+        except Exception:
             db.session.rollback()
             flash(_("There was an issue updating your task."), "danger")
             return redirect(url_for("index"))
-    return render_template("update.html", task=task)
+    elif request.method == "GET":
+        form.content.data = task.content
+    return render_template("update.html", task=task, form=form)
 
 
 @app.errorhandler(404)

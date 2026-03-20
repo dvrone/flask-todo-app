@@ -6,20 +6,18 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <h1 class="text-center mb-3">{{ _("Update Task") }}</h1>
-            <form action="{{ url_for('update', id=task.id) }}"
-                  method="post"
-                  class="input-group input-group-lg shadow-sm">
-                <input type="text"
-                       class="form-control"
-                       name="content"
-                       id="content"
-                       maxlength="200"
-                       value="{{ task.content }}"
-                       required
-                       autofocus>
-                <button type="submit" class="btn btn-primary">
-                    <i class="bi bi-save me-1"></i> {{ _("Update") }}
-                </button>
+            <form action="{{ url_for('update', id=task.id) }}" method="post">
+                <div class="input-group input-group-lg">
+                    {{ form.hidden_tag() }}
+                    {{ form.content(class="form-control" + (" is-invalid" if form.content.errors else "") ,
+                    placeholder=_('Enter your task')) }}
+                    {{ form.submit(class="btn btn-primary") }}
+                    {% if form.content.errors %}
+                        <div class="invalid-feedback">
+                            {% for error in form.content.errors %}{{ error }}{% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
             </form>
             <div class="text-center mt-3">
                 <a href="{{ url_for("index") }}"
